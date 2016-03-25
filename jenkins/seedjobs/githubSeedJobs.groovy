@@ -7,7 +7,7 @@ projects.each {
   def gitUrl=it.ssh_url
   println "Creating Job ${jobName} for ${gitUrl}"
 
-  job("GitHub-${jobName}") {
+  job("${jobName}") {
     logRotator(-1, 10)
     scm {
         github(githubName, 'master')
@@ -20,7 +20,7 @@ projects.each {
   def jobName1='dev'
   println "Creating Job ${jobName1} for ${gitUrl}"
 
-  job("GitHub-${jobName}") {
+  job(jobName1) {
     logRotator(-1, 10)
     scm {
         github(githubName, 'master')
@@ -32,8 +32,7 @@ projects.each {
   
   def jobName2='test'
   println "Creating Job ${jobName2} for ${gitUrl}"
-
-  job("GitHub-${jobName}") {
+  job(jobName2) {
     logRotator(-1, 10)
     scm {
         github(githubName, 'master')
@@ -42,8 +41,9 @@ projects.each {
         githubPush()
     }
   }
+}
 
-  listView(githubName) {
+listView(githubName) {
     description('')
     filterBuildQueue()
     filterExecutors()
@@ -59,6 +59,4 @@ projects.each {
         lastFailure()
         lastDuration()
     }
-}
-  
 }
