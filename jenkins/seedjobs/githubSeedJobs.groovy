@@ -2,7 +2,7 @@ def githubApi = new URL("https://api.github.com/users/dEkio/repos")
 def projects = new groovy.json.JsonSlurper().parse(githubApi.newReader())
 
 projects.each {
-  def githubName=it.full_name
+  def githubName=it.name
   def jobName=githubName+'_initial'
   def gitUrl=it.ssh_url
   println "Creating Job ${jobName} for ${gitUrl}"
