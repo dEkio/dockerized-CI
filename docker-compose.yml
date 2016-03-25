@@ -16,9 +16,7 @@ jenkins:
     - "18080:8080"
   links:
     - nexus:nexus
-    - gitlab:gitlab
     - sonar:sonar
-    - selhub:hub
   volumes:
     - /var/run/docker.sock:/var/run/docker.sock
     - /usr/local/bin/docker:/usr/bin/docker
