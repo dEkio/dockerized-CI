@@ -47,7 +47,7 @@ listView(githubName) {
     filterBuildQueue()
     filterExecutors()
     jobs {
-        regex(/${githubName}/)
+        regex(/${githubName.*}/)
     }
     columns {
         status()
