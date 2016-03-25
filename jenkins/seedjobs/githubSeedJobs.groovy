@@ -2,8 +2,8 @@ def githubApi = new URL("https://api.github.com/users/dEkio/repos")
 def projects = new groovy.json.JsonSlurper().parse(githubApi.newReader())
 
 projects.each {
-  def jobName='initial'
   def githubName=it.full_name
+  def jobName=githubName+' initial'
   def gitUrl=it.ssh_url
   println "Creating Job ${jobName} for ${gitUrl}"
 
@@ -17,7 +17,7 @@ projects.each {
     }
   }
   
-  def jobName1='dev'
+  def jobName1=githubName+'dev'
   println "Creating Job ${jobName1} for ${gitUrl}"
 
   job(jobName1) {
@@ -30,7 +30,7 @@ projects.each {
     }
   }
   
-  def jobName2='test'
+  def jobName2=githubName+'test'
   println "Creating Job ${jobName2} for ${gitUrl}"
   job(jobName2) {
     logRotator(-1, 10)
