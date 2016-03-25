@@ -3,7 +3,7 @@ def projects = new groovy.json.JsonSlurper().parse(githubApi.newReader())
 
 projects.each {
   def githubName=it.full_name
-  def jobName=githubName+' initial'
+  def jobName=githubName+'_initial'
   def gitUrl=it.ssh_url
   println "Creating Job ${jobName} for ${gitUrl}"
 
@@ -17,7 +17,7 @@ projects.each {
     }
   }
   
-  def jobName1=githubName+'dev'
+  def jobName1=githubName+'_dev'
   println "Creating Job ${jobName1} for ${gitUrl}"
 
   job(jobName1) {
@@ -30,7 +30,7 @@ projects.each {
     }
   }
   
-  def jobName2=githubName+'test'
+  def jobName2=githubName+'_test'
   println "Creating Job ${jobName2} for ${gitUrl}"
   job(jobName2) {
     logRotator(-1, 10)
@@ -47,7 +47,7 @@ listView(githubName) {
     filterBuildQueue()
     filterExecutors()
     jobs {
-        regex(/${githubName}-.*/)
+        regex(/${githubName}/)
     }
     columns {
         status()
