@@ -41,7 +41,6 @@ projects.each {
         githubPush()
     }
   }
-}
 
 listView(githubName) {
     description('')
@@ -59,4 +58,5 @@ listView(githubName) {
         lastFailure()
         lastDuration()
     }
+} 
 }
