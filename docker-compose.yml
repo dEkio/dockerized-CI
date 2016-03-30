@@ -1,15 +1,8 @@
-nexusdata:
- image: sonatype/nexus:2.11.4-01
- command: echo "data-only container for Nexus"
- 
 nexus:
- image: sonatype/nexus:2.11.4-01
- volumes_from:
-  - nexusdata
- ports:
-  - "9081:8081"
- hostname: "nexus-server"
- 
+  build: ./nexus
+  ports:
+    - "18081:8081"
+
 jenkins:
   build: ./jenkins
   ports:
@@ -20,7 +13,7 @@ jenkins:
   volumes:
     - /var/run/docker.sock:/var/run/docker.sock
     - /usr/local/bin/docker:/usr/bin/docker
- 
+
 sonar:
   build: ./sonar
   ports:
@@ -34,34 +27,3 @@ db:
   environment:
    - POSTGRES_USER=sonar
    - POSTGRES_PASSWORD=sonar
-
-mavenbuild:
- build: maven-build
- 
-seleniumfirefoxtest:
- build: selenium-firefox-test
- 
-registry:
- image: registry:2
- volumes:
-  - /var/lib/registry:/var/lib/registry
- ports:
-  - "9500:5000"
- hostname: "registry-server" 
- 
-registryui:
- image: konradkleine/docker-registry-frontend:v2
- volumes:
-  - /var/lib/registry:/var/lib/registry
- ports:
-  - "9500:5000"
- links:
-  - registry
- environment:
-  - ENV_DOCKER_REGISTRY_HOST=registry-server
-  - ENV_DOCKER_REGISTRY_PORT=5000
-  - ENV_MODE_BROWSE_ONLY=true
- ports:
-  - 9082:80
- hostname: "registry-ui"
- restart: always 
