@@ -18,6 +18,8 @@ RUN sudo apt-get install software-properties-common -y
 #RUN	sudo apt-get update
 RUN	sudo apt-get install maven -y
 
+COPY maven-settings.xml /usr/share/maven/conf/settings.xml
+
 # Adding default Jenkins Jobs
 COPY jobs/1-github-seed-job.xml /usr/share/jenkins/ref/jobs/1-github-seed-job/config.xml
 
