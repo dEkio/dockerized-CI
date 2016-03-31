@@ -11,7 +11,8 @@ COPY plugins.txt /var/jenkins_home/plugins.txt
 RUN /usr/local/bin/plugins.sh /var/jenkins_home/plugins.txt \
 	docker run -v /var/run/docker.sock:/var/run/docker.sock \
            -ti docker
-		   
+
+RUN sudo apt-get update		   
 RUN sudo apt-get install software-properties-common
 RUN	sudo apt-add-repository universe
 RUN	sudo apt-get update
