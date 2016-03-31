@@ -14,8 +14,8 @@ RUN /usr/local/bin/plugins.sh /var/jenkins_home/plugins.txt \
 
 RUN sudo apt-get update		   
 RUN sudo apt-get install software-properties-common -y
-RUN	sudo add-apt-repository "deb http://archive.ubuntu.com/ubuntu $(lsb_release -sc) universe"
-RUN	sudo apt-get update
+#RUN	sudo add-apt-repository "deb http://archive.ubuntu.com/ubuntu $(lsb_release -sc) universe"
+#RUN	sudo apt-get update
 RUN	sudo apt-get install maven -y
 
 # Adding default Jenkins Jobs
