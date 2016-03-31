@@ -12,9 +12,9 @@ RUN /usr/local/bin/plugins.sh /var/jenkins_home/plugins.txt \
 	docker run -v /var/run/docker.sock:/var/run/docker.sock \
            -ti docker
 		   
-RUN yum install wget \ 
-	wget http://repos.fedorapeople.org/repos/dchen/apache-maven/epel-apache-maven.repo -O /etc/yum.repos.d/epel-apache-maven.repo \
-	yum install apache-maven
+RUN yum install wget
+RUN	wget http://repos.fedorapeople.org/repos/dchen/apache-maven/epel-apache-maven.repo -O /etc/yum.repos.d/epel-apache-maven.repo
+RUN	yum install apache-maven
 
 # Adding default Jenkins Jobs
 COPY jobs/1-github-seed-job.xml /usr/share/jenkins/ref/jobs/1-github-seed-job/config.xml
