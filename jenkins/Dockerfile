@@ -12,7 +12,8 @@ RUN /usr/local/bin/plugins.sh /var/jenkins_home/plugins.txt \
 	docker run -v /var/run/docker.sock:/var/run/docker.sock \
            -ti docker
 		   
-RUN sudo apt-add-repository universe \
+RUN sudo apt-get install software-properties-common \
+	sudo apt-add-repository universe \
 	sudo apt-get update \
 	sudo apt-get install maven
 
