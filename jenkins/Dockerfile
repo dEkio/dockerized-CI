@@ -1,25 +1,37 @@
-FROM jenkins:1.625.1
-MAINTAINER Petyo Dimitrov
-ENV REFRESHED_AT 2015-10-24
+FROM jenkins:1.642.1
 
-# Do not drop root to allow jenkins to start containers on the host (dind)
 USER root
+RUN apt-get update \
+      && apt-get install -y sudo \
+      && rm -rf /var/lib/apt/lists/*
+RUN echo "jenkins ALL=NOPASSWD: ALL" >> /etc/sudoers
 
-# Add docker compose
-ENV DOCKER_COMPOSE_VERSION="1.5.0rc1"
-RUN curl -L https://github.com/docker/compose/releases/download/${DOCKER_COMPOSE_VERSION}/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose && \
-  chmod +x /usr/local/bin/docker-compose
+COPY plugins.txt /var/jenkins_home/plugins.txt
+RUN /usr/local/bin/plugins.sh /var/jenkins_home/plugins.txt \
+	docker run -v /var/run/docker.sock:/var/run/docker.sock \
+           -ti docker
 
-# Prep Jenkins Directories
-RUN mkdir /var/log/jenkins
-RUN mkdir /var/cache/jenkins
-RUN chown -R jenkins:jenkins /var/log/jenkins
-RUN chown -R jenkins:jenkins /var/cache/jenkins
+RUN sudo apt-get update		   
+RUN sudo apt-get install software-properties-common -y
+RUN	sudo apt-get install maven -y
 
-# Set Defaults
-ENV JAVA_OPTS="-Xmx6144m"
-ENV JENKINS_OPTS="--handlerCountStartup=100 --handlerCountMax=300 --webroot=/var/cache/jenkins/war"
-# for now removed option "--logfile=/var/log/jenkins/jenkins.log"
+COPY maven-settings.xml /usr/share/maven/conf/settings.xml
 
-COPY plugins.txt /plugins.txt
-RUN /usr/local/bin/plugins.sh /plugins.txt
+# Adding default Jenkins Jobs
+COPY jobs/1-github-seed-job.xml /usr/share/jenkins/ref/jobs/1-github-seed-job/config.xml
+
+############################################
+# Configure Jenkins
+############################################
+# Jenkins settings
+COPY config/config.xml /usr/share/jenkins/ref/config.xml
+
+# Jenkins Settings, i.e. Maven, Groovy, ...
+COPY config/hudson.tasks.Maven.xml /usr/share/jenkins/ref/hudson.tasks.Maven.xml
+COPY config/hudson.plugins.groovy.Groovy.xml /usr/share/jenkins/ref/hudson.plugins.groovy.Groovy.xml
+COPY config/maven-global-settings-files.xml /usr/share/jenkins/ref/maven-global-settings-files.xml
+
+# SSH Keys & Credentials
+COPY config/credentials.xml /usr/share/jenkins/ref/credentials.xml
+COPY config/ssh-keys/cd-demo /usr/share/jenkins/ref/.ssh/id_rsa
+COPY config/ssh-keys/cd-demo.pub /usr/share/jenkins/ref/.ssh/id_rsa.pub

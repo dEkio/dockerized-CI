@@ -3,9 +3,6 @@ nexus:
   ports:
     - "18081:8081"
 
-jenkinsdata:
- build: jenkins-data
- 
 jenkins:
   build: ./jenkins
   ports:
@@ -13,14 +10,10 @@ jenkins:
   links:
     - nexus:nexus
     - sonar:sonar
-  volumes_from:
-  - jenkinsdata
   volumes:
-   - /var/run/docker.sock:/var/run/docker.sock:ro
-   - /usr/local/bin/docker:/usr/bin/docker:ro 
-  privileged: true
-  hostname: "jenkins-server"
- 
+    - /var/run/docker.sock:/var/run/docker.sock
+    - /usr/local/bin/docker:/usr/bin/docker
+
 sonar:
   build: ./sonar
   ports:
