@@ -4,10 +4,7 @@ USER root
 RUN apt-get update \
       && apt-get install -y sudo \
       && rm -rf /var/lib/apt/lists/*
-RUN cat	/etc/group  
-RUN sudo gpasswd -a jenkins docker
 RUN echo "jenkins ALL=NOPASSWD: ALL" >> /etc/sudoers
-USER jenkins
 
 COPY plugins.txt /var/jenkins_home/plugins.txt
 RUN /usr/local/bin/plugins.sh /var/jenkins_home/plugins.txt \
