@@ -5,20 +5,20 @@ RUN apt-get update \
       && apt-get install -y sudo \
       && rm -rf /var/lib/apt/lists/*
 RUN echo "jenkins ALL=NOPASSWD: ALL" >> /etc/sudoers
-
-COPY plugins.txt /var/jenkins_home/plugins.txt
-RUN /usr/local/bin/plugins.sh /var/jenkins_home/plugins.txt \
-	docker run -v /var/run/docker.sock:/var/run/docker.sock \
-           -ti docker
 USER jenkins
+
 RUN sudo apt-get update		   
 RUN sudo apt-get install software-properties-common -y
 RUN	sudo apt-get install maven -y
 
 COPY maven-settings.xml /usr/share/maven/conf/settings.xml
 
+COPY plugins.txt /var/jenkins_home/plugins.txt
+RUN /usr/local/bin/plugins.sh /var/jenkins_home/plugins.txt
+
 # Adding default Jenkins Jobs
 COPY jobs/1-github-seed-job.xml /usr/share/jenkins/ref/jobs/1-github-seed-job/config.xml
+COPY jobs/5-docker-admin-seed-job.xml /usr/share/jenkins/ref/jobs/5-docker-admin-seed-job/config.xml
 
 ############################################
 # Configure Jenkins
