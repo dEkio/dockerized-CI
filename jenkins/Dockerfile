@@ -10,7 +10,7 @@ COPY plugins.txt /var/jenkins_home/plugins.txt
 RUN /usr/local/bin/plugins.sh /var/jenkins_home/plugins.txt \
 	docker run -v /var/run/docker.sock:/var/run/docker.sock \
            -ti docker
-
+USER jenkins
 RUN sudo apt-get update		   
 RUN sudo apt-get install software-properties-common -y
 RUN	sudo apt-get install maven -y
