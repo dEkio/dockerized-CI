@@ -6,6 +6,11 @@ RUN apt-get update \
       && rm -rf /var/lib/apt/lists/*
 RUN echo "jenkins ALL=NOPASSWD: ALL" >> /etc/sudoers
 
+# SSH Keys & Credentials
+COPY config/credentials.xml /usr/share/jenkins/ref/credentials.xml
+COPY config/ssh-keys/cd-demo /usr/share/jenkins/ref/.ssh/id_rsa
+COPY config/ssh-keys/cd-demo.pub /usr/share/jenkins/ref/.ssh/id_rsa.pub
+
 USER jenkins
 COPY plugins.txt /var/jenkins_home/plugins.txt
 RUN /usr/local/bin/plugins.sh /var/jenkins_home/plugins.txt \
@@ -31,7 +36,4 @@ COPY config/hudson.tasks.Maven.xml /usr/share/jenkins/ref/hudson.tasks.Maven.xml
 COPY config/hudson.plugins.groovy.Groovy.xml /usr/share/jenkins/ref/hudson.plugins.groovy.Groovy.xml
 COPY config/maven-global-settings-files.xml /usr/share/jenkins/ref/maven-global-settings-files.xml
 
-# SSH Keys & Credentials
-COPY config/credentials.xml /usr/share/jenkins/ref/credentials.xml
-COPY config/ssh-keys/cd-demo /usr/share/jenkins/ref/.ssh/id_rsa
-COPY config/ssh-keys/cd-demo.pub /usr/share/jenkins/ref/.ssh/id_rsa.pub
+
