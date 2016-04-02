@@ -37,7 +37,11 @@ def createInitial(def gitRepository) {
     publishers {
       chucknorris()
 	  downstreamParameterized {
-        	trigger('eureka-deploy_artefact_nexus')
+        	trigger('eureka-deploy_artefact_nexus'){
+				parameters {
+                    currentBuild()
+                }
+			}
 		}
     }
   }
@@ -72,7 +76,11 @@ def createNexus(def gitRepository) {
     publishers {
       chucknorris()
 	  downstreamParameterized {
-        	trigger('eureka-deploy_jar_container')
+        	trigger('eureka-deploy_jar_container'){
+				parameters {
+                    currentBuild()
+                }
+			}
 		}
     }
   }
