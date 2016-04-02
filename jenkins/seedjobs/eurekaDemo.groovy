@@ -8,7 +8,7 @@ createDockerJob("eureka-initial", initial, gitUrl)
 createDockerJob("eureka-deploy_artefact_nexus", deployToNexusCommands, gitUrl)
 createDockerJob("eureka-deploy_jar_container", deployToContainerCommands, gitUrl)
 
-def createDockerJob(def jobName, def shellCommand, def gitRepository) {
+def createDockerJob(def jobName, List<String> shellCommands, def gitRepository) {
 
   println "############################################################################################################"
   println "Creating Docker Job ${jobName} for gitRepository=${gitRepository}"
@@ -31,8 +31,8 @@ def createDockerJob(def jobName, def shellCommand, def gitRepository) {
     }
     steps {
       steps {
-		shellCommand.each{
-			shell(shellCommand)
+		shellCommands.each{
+			shell(${it})
 		}
       }
     }
