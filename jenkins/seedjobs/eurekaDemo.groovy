@@ -39,7 +39,7 @@ def createInitial(def gitRepository) {
 	  downstreamParameterized {
         	trigger('eureka-deploy_artefact_nexus'){
 				parameters {
-                    currentBuild()
+                    gitRevision(boolean combineQueuedCommits = false)
                 }
 			}
 		}
@@ -78,7 +78,7 @@ def createNexus(def gitRepository) {
 	  downstreamParameterized {
         	trigger('eureka-deploy_jar_container'){
 				parameters {
-                    currentBuild()
+                    gitRevision(boolean combineQueuedCommits = false)
                 }
 			}
 		}
