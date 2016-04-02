@@ -10,7 +10,7 @@ USER jenkins
 RUN sudo apt-get update		   
 RUN sudo apt-get install software-properties-common -y
 RUN	sudo apt-get install maven -y
-RUN apt-get install docker.io -y
+RUN sudo apt-get install docker.io -y
 
 COPY maven-settings.xml /usr/share/maven/conf/settings.xml
 
