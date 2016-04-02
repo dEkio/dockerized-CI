@@ -36,6 +36,9 @@ def createInitial(def gitRepository) {
     }
     publishers {
       chucknorris()
+	  downstreamParameterized {
+        	trigger('eureka-deploy_artefact_nexus')
+		}
     }
   }
 }
@@ -43,7 +46,7 @@ def createInitial(def gitRepository) {
 def createNexus(def gitRepository) {
 
   println "############################################################################################################"
-  println "Creating Docker Job eureka-initial for gitRepository=${gitRepository}"
+  println "Creating Docker Job eureka-deploy_artefact_nexus for gitRepository=${gitRepository}"
   println "############################################################################################################"
 
   job("eureka-deploy_artefact_nexus") {
@@ -68,6 +71,9 @@ def createNexus(def gitRepository) {
     }
     publishers {
       chucknorris()
+	  downstreamParameterized {
+        	trigger('eureka-deploy_jar_container')
+		}
     }
   }
 }
@@ -75,7 +81,7 @@ def createNexus(def gitRepository) {
 def createContainer(def gitRepository) {
 
   println "############################################################################################################"
-  println "Creating Docker Job eureka-initial for gitRepository=${gitRepository}"
+  println "Creating Docker Job eureka-deploy_jar_container for gitRepository=${gitRepository}"
   println "############################################################################################################"
 
   job("eureka-deploy_jar_container") {
