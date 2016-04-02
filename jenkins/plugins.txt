@@ -1,4 +1,4 @@
-credentials:1.24
+credentials:1.26
 git:2.4.2
 git-client:1.19.4
 scm-api:0.2
