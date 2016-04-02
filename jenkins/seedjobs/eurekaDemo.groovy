@@ -1,4 +1,4 @@
-def gitUrl="git@github.com:dEkio/microservicesLocalMonolith.git"
+def gitUrl="https://github.com/dEkio/microservicesLocalMonolith.git"
 
 List<String> deployToContainerCommands = [ "sudo /usr/bin/docker stop eureka1 || echo 'no container to stop'", "sudo /usr/bin/docker rm eureka1 || echo 'no container to delete'", "cd eureka && sudo /usr/bin/docker build -t eureka .", "sudo /usr/bin/docker run -d --name eureka1 -p=18761:8761 eureka"]
 List<String> deployToNexusCommands = [ "mvn -Drepository.address=dockerizedci_nexus_1:8081 -f ${WORKSPACE}/eureka/pom.xml clean deploy" ]
