@@ -31,7 +31,7 @@ def createInitial(def gitRepository) {
     }
     steps {
       steps {
-		shell("mvn  -f ${WORKSPACE}/eureka/pom.xml clean install")
+		shell("mvn  -f eureka/pom.xml clean install")
       }
     }
     publishers {
@@ -63,7 +63,7 @@ def createNexus(def gitRepository) {
     }
     steps {
       steps {
-		shell("mvn -Drepository.address=dockerizedci_nexus_1:8081 -f ${WORKSPACE}/eureka/pom.xml clean deploy")
+		shell("mvn -Drepository.address=dockerizedci_nexus_1:8081 -f eureka/pom.xml clean deploy")
       }
     }
     publishers {
