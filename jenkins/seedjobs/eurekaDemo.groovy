@@ -4,17 +4,17 @@ List<String> deployToContainerCommands = [ "sudo /usr/bin/docker stop eureka1 ||
 List<String> deployToNexusCommands = [ "mvn -Drepository.address=dockerizedci_nexus_1:8081 -f ${WORKSPACE}/eureka/pom.xml clean deploy" ]
 List<String> initial = [ "mvn  -f ${WORKSPACE}/eureka/pom.xml clean install"]
 
-createDockerJob("eureka-initial", initial, gitUrl)
+createInitial(gitUrl)
 createDockerJob("eureka-deploy_artefact_nexus", deployToNexusCommands, gitUrl)
 createDockerJob("eureka-deploy_jar_container", deployToContainerCommands, gitUrl)
 
-def createDockerJob(def jobName, List<String> shellCommands, def gitRepository) {
+def createInitial(def gitRepository) {
 
   println "############################################################################################################"
-  println "Creating Docker Job ${jobName} for gitRepository=${gitRepository}"
+  println "Creating Docker Job eureka-initial for gitRepository=${gitRepository}"
   println "############################################################################################################"
 
-  job(jobName) {
+  job("eureka-initial") {
     logRotator {
         numToKeep(10)
     }
@@ -31,10 +31,7 @@ def createDockerJob(def jobName, List<String> shellCommands, def gitRepository) 
     }
     steps {
       steps {
-		shellCommands.each{
-			println(${it})
-			shell(${it})
-		}
+		shell("sudo /usr/bin/docker stop eureka1 || echo 'no container to stop'")
       }
     }
     publishers {
