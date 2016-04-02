@@ -10,10 +10,10 @@ jenkins:
   links:
     - nexus:nexus
     - sonar:sonar
-  privileged:true
   volumes:
     - /var/run/docker.sock:/var/run/docker.sock
     - /usr/local/bin/docker:/usr/bin/docker
+  privileged: true
 
 sonar:
   build: ./sonar
