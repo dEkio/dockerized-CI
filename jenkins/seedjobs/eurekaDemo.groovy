@@ -32,6 +32,7 @@ def createDockerJob(def jobName, List<String> shellCommands, def gitRepository) 
     steps {
       steps {
 		shellCommands.each{
+			println(${it})
 			shell(${it})
 		}
       }
