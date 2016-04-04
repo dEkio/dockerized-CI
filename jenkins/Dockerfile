@@ -27,6 +27,7 @@ COPY jobs/eureka-seed-job.xml /usr/share/jenkins/ref/jobs/eureka-seed-job/config
 ############################################
 # Jenkins settings
 COPY config/config.xml /usr/share/jenkins/ref/config.xml
+COPY config/hudson.plugins.sonar.SonarPublisher.xml /usr/share/jenkins/ref/hudson.plugins.sonar.SonarPublisher.xml
 
 # Jenkins Settings, i.e. Maven, Groovy, ...
 COPY config/hudson.tasks.Maven.xml /usr/share/jenkins/ref/hudson.tasks.Maven.xml
