@@ -4,7 +4,7 @@
     <hudson.plugins.sonar.SonarInstallation>
       <name>SonarQube</name>
       <disabled>false</disabled>
-      <serverUrl>http://172.17.74.67:9090</serverUrl>
+      <serverUrl>http://172.31.130.195:19000/</serverUrl>
       <mojoVersion></mojoVersion>
       <databaseUrl></databaseUrl>
       <databaseLogin></databaseLogin>

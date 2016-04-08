@@ -8,8 +8,6 @@
 
 FROM java:openjdk-8u45-jdk
 
-MAINTAINER Marcel Birkner <marcel.birkner@codecentric.de>
-
 ENV SONARQUBE_HOME /opt/sonarqube
 
 # Http port

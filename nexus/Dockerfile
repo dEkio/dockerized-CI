@@ -4,8 +4,6 @@
 
 FROM centos:6
 
-MAINTAINER Marcel Birkner <marcel.birkner@codecentric.de>
-
 USER root
 # Update the system
 RUN yum -y update; \
