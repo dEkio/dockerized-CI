@@ -23,6 +23,7 @@ def createInitial(def gitRepository) {
         git {
           remote {
             url(gitRepository)
+			credentials('test')
           }
           createTag(false)
           clean()
