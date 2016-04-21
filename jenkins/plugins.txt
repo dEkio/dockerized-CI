@@ -1,4 +1,4 @@
-credentials:1.26
+credentials:1.27
 git:2.4.2
 git-client:1.19.4
 scm-api:0.2
@@ -30,3 +30,4 @@ jquery:1.11.2-0
 build-pipeline-plugin:1.5.2
 build-flow-plugin:0.18
 sonar:2.3
+htmlpublisher:1.11
