@@ -347,7 +347,7 @@ listView('POC') {
   filterBuildQueue()
   filterExecutors()
   jobs {
-    regex(/POC_-.*/)
+    regex(/POC_.*/)
   }
   columns {
     buildButton()
