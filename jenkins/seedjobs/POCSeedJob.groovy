@@ -5,8 +5,13 @@ List<String> deployToNexusCommands = [ "mvn -Drepository.address=dockerizedci_ne
 List<String> initial = [ "mvn  -f ${WORKSPACE}/eureka/pom.xml clean install"]
 
 createInitial(gitUrl)
+createCodeCoverage(gitUrl)
+createIntegrationTest(gitUrl)
+createSonar(gitUrl)
+createDockerBuild(gitUrl)
+createDeployDev(gitUrl)
+createJMeter(gitUrl)
 createNexus(gitUrl)
-createContainer(gitUrl)
 
 def createInitial(def gitRepository) {
 
