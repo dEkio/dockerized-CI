@@ -16,10 +16,10 @@ createNexus(gitUrl)
 def createInitial(def gitRepository) {
 
   println "############################################################################################################"
-  println "Creating Docker Job eureka-initial for gitRepository=${gitRepository}"
+  println "Creating Docker Job POC_Initial for gitRepository=${gitRepository}"
   println "############################################################################################################"
 
-  job("eureka-initial") {
+  job("POC_Initial") {
     logRotator {
         numToKeep(10)
     }
@@ -347,7 +347,7 @@ listView('POC') {
   filterBuildQueue()
   filterExecutors()
   jobs {
-    regex(/POC-.*/)
+    regex(/POC_-.*/)
   }
   columns {
     buildButton()
