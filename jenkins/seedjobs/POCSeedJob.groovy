@@ -175,7 +175,7 @@ def createSonar(def gitRepository) {
          	javaOpts()
          	task()
          	jdk()
-      	properties("sonar.projectKey= endava.HungryGame sonar.projectName= HungryGame sonar.projectVersion=$SNAPSHOT-1.0.0 sonar.forceAnalysis=true sonar.sources=HungryGame/src/main/java/ sonar.binaries=HungryGame/target/classes/ sonar.tests=HungryGame/src/test/java/ sonar.dynamicAnalysis=reuseReports sonar.java.coveragePlugin=jacoco sonar.surefire.reportsPath=HungryGame/target/surefire-reports/ sonar.jacoco.reportPath=HungryGame/target/coverage-reports/jacoco-unit.exec sonar.language=java sonar.cobertura.reportPath=HungryGame/target/site/cobertura/coverage.xml")
+      	properties("sonar.projectKey= endava.HungryGame\nsonar.projectName= HungryGame sonar.projectVersion=$SNAPSHOT-1.0.0 sonar.forceAnalysis=true sonar.sources=HungryGame/src/main/java/ sonar.binaries=HungryGame/target/classes/ sonar.tests=HungryGame/src/test/java/ sonar.dynamicAnalysis=reuseReports sonar.java.coveragePlugin=jacoco sonar.surefire.reportsPath=HungryGame/target/surefire-reports/ sonar.jacoco.reportPath=HungryGame/target/coverage-reports/jacoco-unit.exec sonar.language=java sonar.cobertura.reportPath=HungryGame/target/site/cobertura/coverage.xml")
      	}
     }
 	
