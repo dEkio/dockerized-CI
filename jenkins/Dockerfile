@@ -20,8 +20,7 @@ RUN /usr/local/bin/plugins.sh /var/jenkins_home/plugins.txt
 # Adding default Jenkins Jobs
 #COPY jobs/1-github-seed-job.xml /usr/share/jenkins/ref/jobs/1-github-seed-job/config.xml
 #COPY jobs/5-docker-admin-seed-job.xml /usr/share/jenkins/ref/jobs/5-docker-admin-seed-job/config.xml
-#COPY jobs/eureka-seed-job.xml /usr/share/jenkins/ref/jobs/eureka-seed-job/config.xml
-COPY jobs/POC-seed-job.xml /usr/share/jenkins/ref/jobs/POC-seed-job/config.xml
+COPY jobs/eureka-seed-job.xml /usr/share/jenkins/ref/jobs/eureka-seed-job/config.xml
 
 ############################################
 # Configure Jenkins
