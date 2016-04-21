@@ -30,3 +30,4 @@ jquery:1.11.2-0
 build-pipeline-plugin:1.5.2
 build-flow-plugin:0.18
 sonar:2.3
+htmlpublisher:1.11
