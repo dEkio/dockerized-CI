@@ -43,7 +43,7 @@ def createInitial(def gitRepository) {
     publishers {
       chucknorris()
 	  downstreamParameterized {
-        	trigger('eureka-deploy_artefact_nexus'){
+        	trigger('POC_CodeCoverage', 'POC_SonarQube', 'POC_IntegrationTest'){
 				parameters {
                     gitRevision(false)
                 }
@@ -157,9 +157,8 @@ def createSonar(def gitRepository) {
         git {
           remote {
             url(gitRepository)
-          }
-          createTag(false)
-          clean()
+			credentials('endavaGit')
+		  }
         }
       }
     }
@@ -306,10 +305,10 @@ def createJMeter(def gitRepository) {
 def createNexus(def gitRepository) {
 
   println "############################################################################################################"
-  println "Creating Docker Job eureka-deploy_artefact_nexus for gitRepository=${gitRepository}"
+  println "Creating Docker Job POC_NexusRelease for gitRepository=${gitRepository}"
   println "############################################################################################################"
 
-  job("eureka-deploy_artefact_nexus") {
+  job("POC_NexusRelease") {
     logRotator {
         numToKeep(10)
     }
