@@ -43,7 +43,17 @@ def createInitial(def gitRepository) {
     publishers {
       chucknorris()
 	  downstreamParameterized {
-        	trigger('POC_CodeCoverage', 'POC_SonarQube', 'POC_IntegrationTest'){
+        	trigger('POC_CodeCoverage'){
+				parameters {
+                    gitRevision(false)
+                }
+			}
+			trigger('POC_SonarQube'){
+				parameters {
+                    gitRevision(false)
+                }
+			}
+			trigger('POC_IntegrationTest'){
 				parameters {
                     gitRevision(false)
                 }
