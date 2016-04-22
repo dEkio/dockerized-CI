@@ -58,6 +58,11 @@ def createInitial(def gitRepository) {
                     gitRevision(false)
                 }
 			}
+			trigger('POC_DockerBuild'){
+				parameters {
+                    gitRevision(false)
+                }
+			}
 		}
     }
   }
@@ -102,13 +107,6 @@ def createCodeCoverage(def gitRepository) {
           	
     	}
       chucknorris()
-	  downstreamParameterized {
-        	trigger('eureka-deploy_jar_container'){
-				parameters {
-                    gitRevision(false)
-                }
-			}
-		}
     }
   }
 }
@@ -141,13 +139,6 @@ def createIntegrationTest(def gitRepository) {
     }
     publishers {
       chucknorris()
-	  downstreamParameterized {
-        	trigger('eureka-deploy_jar_container'){
-				parameters {
-                    gitRevision(false)
-                }
-			}
-		}
     }
   }
 }
@@ -190,13 +181,6 @@ def createSonar(def gitRepository) {
 	
     publishers {
       chucknorris()
-	  downstreamParameterized {
-        	trigger('eureka-deploy_jar_container'){
-				parameters {
-                    gitRevision(false)
-                }
-			}
-		}
     }
   }
 }
@@ -233,6 +217,13 @@ def createDockerBuild(def gitRepository) {
     }
     publishers {
       chucknorris()
+	  downstreamParameterized {
+        	trigger('POC_DeployDev'){
+				parameters {
+                    gitRevision(false)
+                }
+			}
+		}
     }
   }
 }
@@ -269,6 +260,13 @@ def createDeployDev(def gitRepository) {
     }
     publishers {
       chucknorris()
+	  downstreamParameterized {
+        	trigger('POC_JMeterTests'){
+				parameters {
+                    gitRevision(false)
+                }
+			}
+		}
     }
   }
 }
@@ -302,7 +300,7 @@ def createJMeter(def gitRepository) {
     publishers {
       chucknorris()
 	  downstreamParameterized {
-        	trigger('eureka-deploy_jar_container'){
+        	trigger('POC_NexusRelease'){
 				parameters {
                     gitRevision(false)
                 }
